@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React from "react";
 import './App.css';
 import Title from './components/Title';
@@ -21,13 +20,13 @@ function App() {
 
     React.useEffect(() => {
         const q = query(collection(db, "items"), orderBy("priority", "desc"));
-        const unsub = onSnapshot(q, (querySnapshot) => {
+        onSnapshot(q, (querySnapshot) => {
             let itemsArray = [];
             querySnapshot.forEach((doc) => {
                 itemsArray.push({...doc.data(), id: doc.id});
-            });
+            })
             setItems(itemsArray);
-        });
+        })
     }, []);
 
     const toggleComplete = async (item, title) => {
@@ -52,24 +51,26 @@ function App() {
 
     return (
         <div className="App">
-            <div>
+            <header className="wrapper">
                 <Title />
-            </div>
-            <div>
-                <AddItem />
-            </div>
-            <div>
-                {items.map((item) => (
-                    <Item
-                        key={item.id}
-                        item={item}
-                        toggleComplete={toggleComplete}
-                        cyclePriority={cyclePriority}
-                        handleDelete={handleDelete}
-                        handleEdit={handleEdit}
-                    />
-                ))}
-            </div>
+            </header>
+            <main className="wrapper">
+                <aside>
+                    <AddItem />
+                </aside>
+                <section>
+                    {items.map((item) => (
+                        <Item
+                            key={item.id}
+                            item={item}
+                            toggleComplete={toggleComplete}
+                            cyclePriority={cyclePriority}
+                            handleDelete={handleDelete}
+                            handleEdit={handleEdit}
+                        />
+                    ))}
+                </section>
+            </main>
         </div>
     );
 }

@@ -6,7 +6,7 @@ import {ReactComponent as IconAdd} from './icons/plus.svg';
 
 export default function AddItem() {
     const [title, setTitle] = React.useState("");
-    
+    const d = new Date();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,31 +15,30 @@ export default function AddItem() {
                 title,
                 priority: 0,
                 completed: false,
-            });
+                created: d.getTime(),
+            })
             setTitle("");
         }
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <span className="input_container">
-                <label>
-                <svg viewBox="0 0 100 100" width="16px">
-                    <g>
-                        <path id="svg_2" d="m0,38l37,0l11,-38l11,38l37,0l-30,23l11,38l-30,-23l-30,23l11,-38l-30,-23l0,0z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff" />
-                    </g>
-                </svg>
-                </label>
-                <input
-                    type="text"
-                    placeholder="Enter todo..."
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-            </span>
-            <span className="btn_container">
-                <button><IconAdd /></button>
-            </span>
+            <div className="form-inline">
+            <svg viewBox="0 0 100 100" width="16px">
+                <g>
+                    <path id="svg_2" d="m0,38l37,0l11,-38l11,38l37,0l-30,23l11,38l-30,-23l-30,23l11,-38l-30,-23l0,0z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff" />
+                </g>
+            </svg>
+            <div className="input-wrapper">
+            <input
+                type="text"
+                placeholder="Enter todo..."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+            />
+            </div>
+            <button><IconAdd /></button>
+            </div>
         </form>
     );
 }

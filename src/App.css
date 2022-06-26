@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -10,6 +12,7 @@ html {
 }
 
 h1 {
+    font-family: 'Baloo 2', cursive;
     padding: 2rem;
 }
 
@@ -21,6 +24,16 @@ input, button {
     min-width: 32px;
     height: 28px;
     margin-right: 5px;
+    border: 0 solid;
+}
+
+input {
+    position: relative;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
 }
 
 svg {
@@ -28,4 +41,29 @@ svg {
     padding-bottom: 5px;
     width: 22px;
     height: 22px;
+}
+
+.wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+.form-inline {
+    display: flex;
+}
+
+.input-wrapper {
+    position: relative;
+    flex-grow: 2;
+    margin-right: 32px;
+}
+
+.input-wrapper::after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 1.6rem;
+    content: "";
+    border-bottom: 1px solid #ddd;
+    width: 100%;
 }

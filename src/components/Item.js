@@ -28,8 +28,7 @@ export default function Item({
                     "#FF6361";
 
     return (
-        <div className="item">
-            <div>
+        <div className="form-inline">
             <label id="priority" onClick={() => cyclePriority(item)}>
                 <svg viewBox="0 0 100 100" width="16px">
                     <g>
@@ -37,6 +36,7 @@ export default function Item({
                     </g>
                 </svg>
             </label>
+            <div className="input-wrapper">
             <input
                 style={{ textDecoration: item.completed && "line-through" }}
                 type="text"
@@ -44,21 +44,21 @@ export default function Item({
                 className="list"
                 onChange={handleChange}
             />
-                <button
-                    className="button-complete"
-                    onClick={() => toggleComplete(item)}
-                ><IconCheck /></button>
-
-                <button
-                    className="button-edit"
-                    onClick={() => handleEdit(item)}
-                ><IconEdit /></button>
-
-                <button
-                    className="button-delete"
-                    onClick={() => handleDelete(item)}
-                ><IconDelete /></button>
             </div>
+            <button
+                className="button-complete"
+                onClick={() => toggleComplete(item)}
+            ><IconCheck /></button>
+
+            <button
+                className="button-edit"
+                onClick={() => handleEdit(item)}
+            ><IconEdit /></button>
+
+            <button
+                className="button-delete"
+                onClick={() => handleDelete(item)}
+            ><IconDelete /></button>
         </div>
     );
 }
