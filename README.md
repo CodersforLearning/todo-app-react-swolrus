@@ -12,4 +12,4 @@ yarn start
 ```
 
 Deployed via private repo at:
-(dwn.dev)[https://tasks.dwn.dev]
+[dwn.dev](https://tasks.dwn.dev)
