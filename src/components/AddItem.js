@@ -2,42 +2,42 @@ import React from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-import {ReactComponent as IconAdd} from './icons/plus.svg';
+import {ReactComponent as IconAdd} from '../icons/plus.svg';
 
-export default function AddItem() {
+export default function AddItem({ loggedin }) {
     const [title, setTitle] = React.useState("");
     const d = new Date();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (title !== "") {
+            let t = title;
+            let a = false;
+            if (loggedin) a = !a;
+            setTitle("");
             await addDoc(collection(db, "items"), {
-                title,
+                title: t,
                 priority: 0,
                 completed: false,
-                created: d.getTime(),
+                authed: a,
+                timeCreated: d.getTime(),
             })
-            setTitle("");
         }
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="form-inline">
-            <svg viewBox="0 0 100 100" width="16px">
-                <g>
-                    <path id="svg_2" d="m0,38l37,0l11,-38l11,38l37,0l-30,23l11,38l-30,-23l-30,23l11,-38l-30,-23l0,0z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff" />
-                </g>
-            </svg>
-            <div className="input-wrapper">
-            <input
-                type="text"
-                placeholder="Enter todo..."
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            />
-            </div>
-            <button><IconAdd /></button>
+            <div className="additem form-inline">
+                <button className="btn btn__clear btn__plus"><IconAdd /></button>
+                <span style={{width:"12px"}}></span>
+                <div className="input-wrapper">
+                    <input
+                        type="text"
+                        placeholder="Enter what he didn't done this time..."
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </div>
             </div>
         </form>
     );
